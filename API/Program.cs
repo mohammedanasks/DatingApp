@@ -2,6 +2,7 @@ using System.Text;
 using API.Data;
 using API.Extensions;
 using API.interfaces;
+using API.Middleware;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,8 @@ builder.Services.AddIdentityServiceExtensions(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline. 
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
  
 app.UseCors(builder=> builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200")); 
 
