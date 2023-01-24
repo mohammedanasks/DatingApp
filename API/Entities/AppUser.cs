@@ -1,4 +1,7 @@
 
+using System.Text.Json.Serialization;
+using API.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities
 {
@@ -10,5 +13,34 @@ namespace API.Entities
         public byte[] PasswordHash { get; set; }
 
         public byte[] PasswordSalt { get; set; }
+
+
+        public DateTime DateOfBirth{set;get;}
+
+        public string KnownAs { get; set; }
+
+   
+        public DateTime LastActive {get;set;}=DateTime.UtcNow;
+
+        public DateTime Created {get;set;}=DateTime.UtcNow;
+
+        public string Gender {get;set;}
+
+        public string Introduction {get;set;}
+
+        public string Looking {get;set;}
+
+        public string interests {get;set;}
+
+        public string City {get;set;}
+
+        public string Country {get;set;}
+        
+        public List<Photo> Photos {get;set;}=new();
+
+        // public  int  GetAge(){
+
+        //     return  DateOfBirth.CalculateAge();
+        // }
     }
 }
