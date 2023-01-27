@@ -6,6 +6,7 @@ using API.interfaces;
 using API.AutoMapper;
 using AutoMapper;
 using API.Dtos;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
@@ -48,6 +49,19 @@ namespace API.Controllers
             return Ok(users);
         }
            
+        [HttpPut]
+        public async Task<ActionResult>UpdateUser(MemberUpdateDto MemberUpdatedDto){
+            var username= User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user=await _UserRepository.GetUserByName(username);
+
+            if(user==null) return NotFound();
+            _Mapper.Map(MemberUpdatedDto,user);
+
+            if(await _UserRepository.SaveAll())return NoContent();
+
+            return BadRequest("Failed to update user");
+        }   
 
     }
+
 }
